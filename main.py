@@ -21,7 +21,7 @@ class MyPromt(Cmd):
         my_list = os.listdir(dir)
         dictOfProjects = {i : None for i in my_list}
 
-
+        print(dir)
 
         class Project():
 
