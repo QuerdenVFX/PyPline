@@ -15,18 +15,23 @@ class MyPromt(Cmd):
 
     
     def do_add(self, inp):
+        
+        
+        if Path(os.getcwd()+"/PROJECT DIRECTORY").exists():
+            dir = os.path.abspath(os.getcwd()+"/PROJECT DIRECTORY")
+        else:
+            dir = os.path.abspath(os.getcwd()+"/PROJECT DIRECTORY")
+            os.mkdir(os.path.abspath(dir))
 
-        dir = os.path.abspath(os.getcwd()+"/PROJECT DIRECTORY")
+
 
         my_list = os.listdir(dir)
         dictOfProjects = {i : None for i in my_list}
 
-        print(dir)
+
 
         class Project():
-
-
-            
+      
 
 
             #----------------------------------------------------------------#
@@ -58,7 +63,7 @@ class MyPromt(Cmd):
             #                        PROJECT FOLDER                          #
             
             #softwareList = ["Nuke", "Houdini", "Maya"]
-            BaseFolder = inquirer.text(message="Base Folder :", default=os.path.abspath(os.getcwd()+"/PROJECT DIRECTORY")).execute()
+            BaseFolder = inquirer.text(message="Base Folder :", default=(dir)).execute()
             path = os.path.abspath(f"{BaseFolder}/{Name}/{Shot}/")
             library_path = os.path.abspath(path + "/_Library")
 
@@ -75,10 +80,10 @@ class MyPromt(Cmd):
                         }
 
             Soft_basic_file= {
-                            "Houdini": os.path.abspath(f"{os.getcwd()}/HOUDINI_FILE.hipnc"),
+                            "Houdini": os.path.abspath(f"{os.getcwd()}/req/HOUDINI_FILE.hipnc"),
                             "Maya":"",
-                            "Nuke": os.path.abspath(f"{os.getcwd()}/NUKE_FILE.nk"),
-                            "Blender":os.path.abspath(f"{os.getcwd()}/BLENDER_FILE.blend")
+                            "Nuke": os.path.abspath(f"{os.getcwd()}/req/NUKE_FILE.nk"),
+                            "Blender":os.path.abspath(f"{os.getcwd()}/req/BLENDER_FILE.blend")
                             }
                             
 
