@@ -9,14 +9,33 @@ from cmd import Cmd
 import subprocess as sp
 
 
+
+
 class MyPromt(Cmd):
     prompt= ">"
+
     intro="Welcome to Pypline"
+    def do_send(self, line):
+        pass
+
 
     
+
+      
+    
+    def do_exit(self, inp):
+        return True
+
+
     def do_add(self, inp):
-        
-        
+        keybindings = {
+                    "skip": [{"key": "c-c"}],
+                    "interrupt": [{"key": "c-d"}],
+                   
+                }
+
+
+
         if Path(os.getcwd()+"/PROJECT DIRECTORY").exists():
             dir = os.path.abspath(os.getcwd()+"/PROJECT DIRECTORY")
         else:
@@ -36,21 +55,21 @@ class MyPromt(Cmd):
 
             #----------------------------------------------------------------#
             #                        PROJECT Data                            #
-            Name = inquirer.text(message="Project Name :", completer={i : None for i in my_list}, multicolumn_complete=True).execute()
+            Name = inquirer.text(message="Project Name :", completer={i : None for i in my_list}, multicolumn_complete=True, keybindings=keybindings).execute()
             Shot = inquirer.text(message="Shot Name :").execute()
-            Resolution = inquirer.select(message= "Resolution :", choices=["1280x720", "1920x1080", "2048x1152", "3040x2160"]).execute()
+            Resolution = inquirer.select(message= "Resolution :", choices=["1280x720", "1920x1080", "2048x1152", "3040x2160"],keybindings=keybindings).execute()
             resolutionX, resolutionY = Resolution.split("x")
             resolutionX = int("".join([i for i in resolutionX if i.isdigit()]))
             resolutionY = int("".join([i for i in resolutionY if i.isdigit()]))
             
             
-            FrameRate = inquirer.select(message="Frame Rate :", choices=[17, 24, 25, 30, 60, 120], default=24).execute()
+            FrameRate = inquirer.select(message="Frame Rate :", choices=[17, 24, 25, 30, 60, 120], default=24, keybindings=keybindings).execute()
             Software_choise =  [Choice("Houdini", name="Houdini"),
                                 Choice("Nuke", name="Nuke"),
                                 Choice("Maya", name="Maya"),
                                 Choice("Blender", name="Blender")]
             Software = inquirer.checkbox(
-                                    message="Select Project Software:", choices=Software_choise).execute()
+                                    message="Select Project Software:", choices=Software_choise, keybindings=keybindings).execute()
 
             JSON_data = {"Shot" : Shot,
                         "ResolutionX" : resolutionX,
@@ -63,7 +82,7 @@ class MyPromt(Cmd):
             #                        PROJECT FOLDER                          #
             
             #softwareList = ["Nuke", "Houdini", "Maya"]
-            BaseFolder = inquirer.text(message="Base Folder :", default=(dir)).execute()
+            BaseFolder = inquirer.text(message="Base Folder :", default=(dir), keybindings=keybindings).execute()
             path = os.path.abspath(f"{BaseFolder}/{Name}/{Shot}/")
             library_path = os.path.abspath(path + "/_Library")
 
@@ -146,6 +165,8 @@ class MyPromt(Cmd):
             with open(ShotList_path, "w") as outfile:
                 outfile.write(ListInfo)
 
+        pass
+
 
 
 
@@ -219,6 +240,7 @@ class MyPromt(Cmd):
 
    
         
+if __name__ == '__main__':
 
-MyPromt().cmdloop()
-
+    MyPromt().cmdloop()
+    
