@@ -55,23 +55,23 @@ try:
         #                        SOFTWARE FOLDER  PREP.                  #
 
         Soft_Folder = {
-                        "Houdini":["cache", "flipbook", "render", "obj"],
+                        "Houdini": ["hip","cache", "flipbook", "render", "obj"],
                         "Maya":["assets","autosave","cache","clips",'data', 'images', 'movies', 'renderData','sceneAssembly', 'scenes', 'scripts', 'sound','sourceimages','Time Editor'],
                         "Nuke":["comp","render"],
-                        "Blender":["cache","flipbook", "render", "obj"]
-                    }
+                        "Blender":["cache","flipbook", "render", "obj"]}
+                    
 
         Soft_basic_file= {
-                        "Houdini": os.path.abspath(f"{os.getcwd()}/HOUDINI_FILE.hipnc"),
-                        "Maya":"",
-                        "Nuke": os.path.abspath(f"{os.getcwd()}/NUKE_FILE.nk"),
-                        "Blender":os.path.abspath(f"{os.getcwd()}/BLENDER_FILE.blend")
+                        "Houdini": os.path.abspath(f"{os.getcwd()}/req//HOUDINI_FILE.hipnc"),
+                        "Maya":os.path.abspath(f"{os.getcwd()}/req/MAYA_FILE.mb"),
+                        "Nuke": os.path.abspath(f"{os.getcwd()}/req/NUKE_FILE.nk"),
+                        "Blender":os.path.abspath(f"{os.getcwd()}/req/BLENDER_FILE.blend")
                         }
                         
 
         Soft_ext=   {
                     "Houdini": "hipnc",
-                    "Maya":"",
+                    "Maya":"mb",
                     "Nuke": "nk",
                     "Blender": "blend"
                     }
@@ -89,12 +89,27 @@ try:
         os.makedirs(Project.path)
         os.mkdir(Project.library_path)
 
+    
     for soft in Project.Software:
+        for folder in Project.Soft_Folder[soft]:
+            os.makedirs(os.path.abspath(f"{Project.path}/{soft}/{folder}"))
+        
+        
         if Path(f"{Project.path}/{soft}").exists():
+            if soft == "Maya":
+                shutil.copy(Project.Soft_basic_file[f"{soft}"], f"{Project.path}/{soft}/scenes/{Project.Shot}_v001.{Project.Soft_ext[soft]}")
+            elif soft == "Nuke":
+                shutil.copy(Project.Soft_basic_file[f"{soft}"], f"{Project.path}/{soft}/comp/{Project.Shot}_v001.{Project.Soft_ext[soft]}")
+            elif soft == "Houdini":
+                shutil.copy(Project.Soft_basic_file[f"{soft}"], f"{Project.path}/{soft}/hip/{Project.Shot}_v001.{Project.Soft_ext[soft]}")
+            else:
+                shutil.copy(Project.Soft_basic_file[f"{soft}"], f"{Project.path}/{soft}/{Project.Shot}_v001.{Project.Soft_ext[soft]}")
             pass
         else:
-            os.makedirs(f"{Project.path}/{soft}")
+            #os.makedirs(f"{Project.path}/{soft}")
+
             shutil.copy(Project.Soft_basic_file[f"{soft}"], f"{Project.path}/{soft}/{Project.Shot}_v001.{Project.Soft_ext[soft]}")
+        
 
     #Create ShotList and Shot Data
 
