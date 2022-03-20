@@ -29,7 +29,8 @@ class MyPromt(Cmd):
 
         pass
 
-
+    def do_conf(self,inp):
+        os.system("config_path.py")
 
 
     def do_list(self, inp):
