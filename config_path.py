@@ -1,24 +1,25 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox, ttk
 import os
+import csv
 from csv import writer
 import pandas as pd
 
 # initalise the tkinter GUI
 root = tk.Tk()
 
-root.geometry("500x400") # set the root dimensions
+root.geometry("800x400") # set the root dimensions
 root.pack_propagate(False) # tells the root to not let the widgets inside it determine its size.
 root.resizable(0, 0) # makes the root window fixed in size.
 
 # Frame for TreeView
 frame1 = tk.LabelFrame(root, text="Soft Data")
-frame1.place(height=200, width=500)
+frame1.place(height=200, width=800)
 
 
 # Frame for edit file
 edit_frame = tk.LabelFrame(root, text="Edit")
-edit_frame.place(height=150, width=500, rely=0.5, relx=0)
+edit_frame.place(height=150, width=800, rely=0.5, relx=0)
 
 soft_lb = tk.Label(edit_frame, text="Software:")
 soft_lb.place(relx=0, rely=0)
@@ -65,15 +66,23 @@ treescrolly.pack(side="right", fill="y") # make the scrollbar fill the y axis of
 
 def add():
     info = f"Soft:{soft_en.get()}\nPath:{path_en.get()}\nFolders: {folders_en.get()}"
-    add_info = [soft_en.get(),path_en.get(), folders_en.get()]
+    add_info = [soft_en.get(),os.path.abspath(path_en.get()), folders_en.get()]
     print(add_info)
 
     with open ("config.csv","a", newline="") as csv_file:
         csv_writer = writer(csv_file)
         csv_writer.writerow(add_info)
     
-    
-
+with open("config.csv", mode="r") as csv_file:
+    csv_reader = csv.DictReader(csv_file)
+    line_count = 0
+    for row in csv_reader:
+        if line_count==0:
+            print(f'Column names are {", ".join(row)}')
+            line_count += 1
+        print(f'\t{row["software"]}, launch path is {row["path"]}, and the folder needed are {row["matrices"]}')
+        line_count+=1
+    print(f'Process {line_count} lines.')
 
 def reload():
     """If the file selected is valid this will load the file into the Treeview"""

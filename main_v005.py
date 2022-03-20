@@ -7,6 +7,7 @@ from os.path import exists
 from pathlib import Path
 from cmd import Cmd
 import subprocess as sp
+import csv
 
 
 
@@ -42,15 +43,24 @@ class MyPromt(Cmd):
 
 
         #print(my_list)
+    with open("config.csv", mode="r") as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+        line_count = 1
 
-    def do_houdini(self, inp):
-        os.startfile(os.path.abspath("C:/Program Files/Side Effects Software/Houdini 19.0.561/bin/houdinifx.exe"))
+        for row in csv_reader:
+            funct = f"do_{row['software']}"
+            eval(f"""def do_{row['software']}(self, inp):
+                os.startfile(os.path.abspath({row["path"]}))""")
+            line_count+=1
+            
+    # def do_houdini(self, inp):
+    #     os.startfile(os.path.abspath("C:/Program Files/Side Effects Software/Houdini 19.0.561/bin/houdinifx.exe"))
 
-    def do_blender(self, inp):
-        os.startfile(os.path.abspath("C:/Program Files/Blender Foundation/Blender 3.0/blender-launcher.exe"))
+    # def do_blender(self, inp):
+    #     os.startfile(os.path.abspath("C:/Program Files/Blender Foundation/Blender 3.0/blender-launcher.exe"))
     
-    def do_nuke(self, inp):
-        os.startfile(os.path.abspath("C:/Program Files/Nuke13.0v1/Nuke13.0.exe"))
+    # def do_nuke(self, inp):
+    #     os.startfile(os.path.abspath("C:/Program Files/Nuke13.0v1/Nuke13.0.exe"))
 
     # def do_gs(self, inp):
     #     project = inp.split(" ")[0]
