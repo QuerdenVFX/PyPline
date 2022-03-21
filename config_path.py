@@ -44,11 +44,14 @@ folders_en.place(relx=0.2, rely=0.4, height=20, width=300)
 # button1 = tk.Button(edit_frame, text="Browse A File", command=lambda: File_dialog())
 # button1.place(rely=0.65, relx=0.50)
 
-button2 = tk.Button(edit_frame, text="Reload/Update", command=lambda: reload())
+button2 = tk.Button(edit_frame, text="Reload", command=lambda: reload())
 button2.place(rely=0.65, relx=0.30)
 
 add_bt = tk.Button(edit_frame, text="Add", command=lambda: add())
-add_bt.place(rely=0.65, relx=0.2)
+add_bt.place(rely=0.65, relx=0.1)
+
+save_bt = tk.Button(edit_frame, text="Save", command=lambda: ''())
+save_bt.place(rely=0.65, relx=0.15)
 
 
 
