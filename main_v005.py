@@ -49,8 +49,7 @@ class MyPromt(Cmd):
 
         for row in csv_reader:
             funct = f"do_{row['software']}"
-            eval(f"""def do_{row['software']}(self, inp):
-                os.startfile(os.path.abspath({row["path"]}))""")
+            exec(f"def do_{row['software']}(self, inp):\n\tos.startfile(os.path.abspath(f\'{row['path']}\'))")
             line_count+=1
             
     # def do_houdini(self, inp):
@@ -89,12 +88,21 @@ class MyPromt(Cmd):
 
      
 
-        software_path = {
-                        "houdini": os.path.abspath("C:/Program Files/Side Effects Software/Houdini 19.0.561/bin/houdinifx.exe"),
-                        "maya":"",
-                        "nuke": os.path.abspath("C:/Program Files/Nuke13.0v1/Nuke13.0.exe"),
-                        "blender": os.path.abspath("C:/Program Files/Blender Foundation/Blender 3.0/blender-launcher.exe")
-                        }
+        # software_path = {
+        #                 "houdini": os.path.abspath("C:/Program Files/Side Effects Software/Houdini 19.0.561/bin/houdinifx.exe"),
+        #                 "maya":"",
+        #                 "nuke": os.path.abspath("C:/Program Files/Nuke13.0v1/Nuke13.0.exe"),
+        #                 "blender": os.path.abspath("C:/Program Files/Blender Foundation/Blender 3.0/blender-launcher.exe")
+        #                 }
+        with open("config.csv", mode="r") as csv_file:
+            csv_reader = csv.DictReader(csv_file)
+            line_count = 1
+            software_path = {}
+            for row in csv_reader:
+                #Folders.append(row['matrices'].split(' '))
+                software_path[row['software']] = row['path']
+                line_count+=1
+
 
         for i in software_path:
             if(software in i):
