@@ -1,5 +1,5 @@
-software,path,matrices,project folder
-houdini,C:/Program Files/Side Effects Software/Houdini 19.0.561/bin/houdinifx.exe,hip cache flipbook render obj,hip
-nuke,C:/Program Files/Nuke13.0v1/Nuke13.0.exe,comp render,comp
-blender,C:/Program Files/Blender Foundation/Blender 3.0/blender-launcher.exe,project cache flipbook render obj,project
-resolve,C:\Program Files\Blackmagic Design\DaVinci Resolve\Resolve.exe,project video image son export motion_design,project
+software,path,matrices,extension
+houdini,C:\Program Files\Side Effects Software\Houdini 20.5.278\bin\houdini.exe,cache flipbook render obj,hipnc
+blender,C:\Program Files\Blender Foundation\Blender 4.2\blender-launcher.exe,project cache flipbook render obj,blend
+maya,#    Path not Defined    #,assets autosave cache clips data images movies renderData sceneAssembly scripts sound sourceimages Time Editor,mb
+nuke,#    Path not Defined    #,render,nk
