@@ -1,9 +1,9 @@
-import tkinter as tk
-
-from tkinter import filedialog, messagebox, ttk
-import os
 import csv
+import os
+import tkinter as tk
 from csv import writer
+from tkinter import filedialog, messagebox, ttk
+
 import pandas as pd
 
 
@@ -67,6 +67,7 @@ def conf():
 
     def on_tree_select(event):
         """Function to load the selected row into the entry boxes"""
+        
         try:
             global selected_row
             selected = tv1.selection()[0]
@@ -79,6 +80,7 @@ def conf():
             folders_en.insert(0, selected_row[2])
             ext_en.delete(0, tk.END)
             ext_en.insert(0, selected_row[3])
+            
         except IndexError:
             return None
 
@@ -124,7 +126,7 @@ def conf():
                 folders_en.get(),
                 ext_en.get(),
             ]
-        with open("config.csv", "a", newline="") as csv_file:
+        with open("config.csv", "a", newline="", encoding="UTF-8") as csv_file:
             csv_writer = writer(csv_file)
             csv_writer.writerow(add_info)
 
@@ -210,7 +212,7 @@ def conf():
             tree_data.append(row_values)
 
         # Écrire ces données dans le fichier CSV
-        with open("config.csv", "w", newline="") as file:
+        with open("config.csv", "w", newline="", encoding="UTF-8") as file:
             writer = csv.writer(file)
 
             # Écrire l'en-tête (colonnes)

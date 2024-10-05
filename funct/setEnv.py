@@ -1,7 +1,10 @@
 import xml.etree.ElementTree as ET
 from funct.frame import create_frame
-def set(shot):
-    xml_path = 'C:/Users/Gautier/Documents/houdini20.5/MainMenuCommon.xml'
+
+
+def set_env(shot):
+    """Function for setting Houdini Environment"""
+    xml_path = "C:/Users/Gautier/Documents/houdini20.5/MainMenuCommon.xml"
 
     # Charger le fichier XML
     tree = ET.parse(xml_path)
@@ -19,24 +22,24 @@ def set(shot):
         label.text = f"SHOT --> [{shot}]"
 
         # Ajouter un élément <separatorItem>
-        separator1 = ET.SubElement(submenu, "separatorItem")
+        ET.SubElement(submenu, "separatorItem")
 
         # Ajouter <scriptItem> avec un enfant <label> et <scriptCode>
         script_item = ET.SubElement(submenu, "scriptItem", {"id": "init"})
-        
+
         # Sous-élément <label> dans <scriptItem>
         script_label = ET.SubElement(script_item, "label")
         script_label.text = "Initialize"
-        
+
         # Sous-élément <scriptCode> dans <scriptItem>
         script_code = ET.SubElement(script_item, "scriptCode")
-        script_code.text = '''import pipeline.initialize as ini
-ini.initialize()'''
+        script_code.text = """import pipeline.initialize as ini
+ini.initialize()"""
 
         # Ajouter un deuxième <separatorItem>
-        separator2 = ET.SubElement(submenu, "separatorItem")
+        ET.SubElement(submenu, "separatorItem")
 
-         # Trouver le dernier sous-menu dans <menuBar>
+        # Trouver le dernier sous-menu dans <menuBar>
         last_submenu_index = -1
         for i, elem in enumerate(menu_bar):
             if elem.tag == "subMenu":
@@ -53,27 +56,22 @@ ini.initialize()'''
     else:
         print("<menuBar> not found in the XML.")
 
-def remove():
-    xml_path = 'C:/Users/Gautier/Documents/houdini20.5/MainMenuCommon.xml'
-   
+
+def remove_env():
+    """Function for removing Houdini Environment"""
+    xml_path = "C:/Users/Gautier/Documents/houdini20.5/MainMenuCommon.xml"
+
     # Charger le fichier XML
     tree = ET.parse(xml_path)
     root = tree.getroot()
 
     # Trouver l'élément <menuBar>
     menu_bar = root.find(".//menuBar")
-    
 
     if menu_bar is not None:
         submenu_bar = root.find(".//subMenu[@id='shot']")
         if submenu_bar is not None:
             menu_bar.remove(submenu_bar)
             create_frame(["Environment reset"], center=True)
-            
-        
+
     tree.write(xml_path, encoding="utf-8", xml_declaration=True)
-
-
-    
-
-    

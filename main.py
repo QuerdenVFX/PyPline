@@ -21,7 +21,7 @@ from rich.tree import Tree
 import funct.add as fAdd
 import funct.config as fConf
 import funct.frame as fFrame
-import funct.help as fHelp
+import funct.api as api
 import funct.list as fList
 
 # Importation des modules de ton package
@@ -31,53 +31,61 @@ import funct.styleInquirer as fStyle
 
 
 def ask():
+    """Ask for command"""
     ask = inquirer.text(
         message=">",
-        completer={i: None for i in fHelp.commandList()},
+        completer={i: None for i in api.commandList()},
         style=fStyle.Style(),
     ).execute()
     cmd = ask.split(" ")
     if cmd[0] == "go":
         go(cmd)
-    elif cmd[0] in fHelp.API.software_dict:
-        fSet.remove()
-        sp.Popen(fHelp.API.software_paths[cmd[0]])
+    elif cmd[0] in api.API.software_dict:
+        fSet.remove_env()
+        sp.Popen(api.API.software_paths[cmd[0]])
     else:
         exec(f"{cmd[0]}()")
 
 
 def reload():
+    """Reload all modules"""
     importlib.reload(fOpen)
     importlib.reload(fAdd)
     importlib.reload(fConf)
     importlib.reload(fList)
-    importlib.reload(fHelp)
+    importlib.reload(api)
     importlib.reload(fFrame)
     importlib.reload(fSet)
     print("All script reloaded")
 
 
 def help():
-    fHelp.showHelp()
+    """Print help"""
+    api.showHelp()
 
 
 def add():
+    """Add a new project"""
     fAdd.add()
 
 
 def conf():
+    """Configure PyPline"""
     fConf.conf()
 
 
 def go(inp):
-    fOpen.openShot(inp)
+    """Open a shot"""
+    fOpen.open_shot(inp)
 
 
 def list():
-    fList.listShot()
+    """List all shots"""
+    fList.list_shot()
 
 
 def clear():
+    """Clear console"""
     if os.name == "nt":  # Pour Windows
         os.system("cls")
     else:  # Pour macOS et Linux (systèmes Unix-based)
@@ -85,11 +93,15 @@ def clear():
 
 
 def reset():
-    fSet.remove()
+    """Reset PyPline"""
+    fSet.remove_env()
 
 
 class CLI:
+    """Class for command line interface"""
+
     def run(self):
+        """Run the command line interface"""
         print("\nWelcome in PyPline\n")
         while True:
             try:

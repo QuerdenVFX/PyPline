@@ -29,13 +29,7 @@ class API:
     if os.path.isfile(file):
         with open(file, mode="r", encoding="UTF-8") as csv_file:
             csv_reader = csv.DictReader(csv_file)
-            for row in csv_reader:
-                if row["path"] != "#    Path not Defined    #":
-                    software = row["software"]
-                    commands[software] = f"Execute le programme {software}"
-                    software_paths[software] = row["path"]
-                    software_dict.append(software)
-                    software_ext[software] = row["extension"]
+            soft = {i["software"]: {"path": i["path"], "ext":i["extension"], "matrice":i["matrices"]} for i in csv_reader if i["path"] != "#    Path not Defined    #"}
 
     else:
         create_frame(["config.csv missing", "new config.csv file created"])
@@ -44,8 +38,7 @@ class API:
             writer = csv.writer(csv_file)
             writer.writerow(data)
 
-    for command, description in commands.items():
-        help.append(f"   {command}: {description}    ")
+    commands.update({i: f"Execute le programme {i}" for i in soft})
 
 
 def commandList():
@@ -53,7 +46,8 @@ def commandList():
 
 
 def showHelp():
-    create_frame(API.help, center=False)
+    create_frame([f"   {i}: {API.commands[i]}    " for i in API.commands])
+    #print([f"   {i}: {API.commands[i]}    " for i in API.commands])
 
 
 def testHelp(soft):

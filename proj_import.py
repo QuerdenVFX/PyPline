@@ -21,7 +21,7 @@ from rich.tree import Tree
 import funct.add as fAdd
 import funct.config as fConf
 import funct.frame as fFrame
-import funct.help as fHelp
+import funct.api as fHelp
 import funct.list as fList
 
 # Importation des modules de ton package
