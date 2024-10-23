@@ -11,3 +11,7 @@ dist/
 _pycache_/
 build/
 *.exe
+main.spec
+/funct/__pycache__
+/funct/__pycache__
+/funct/__pycache__

@@ -16,7 +16,6 @@ class API:
         "list": "List all project",
         "go": "Run software with selected project and shot",
         "clear": "Clear the command line",
-        "reload": "Reload scripts",
         "reset": "Reset work environment",
         "exit": "Close PyPline",
     }
@@ -29,7 +28,15 @@ class API:
     if os.path.isfile(file):
         with open(file, mode="r", encoding="UTF-8") as csv_file:
             csv_reader = csv.DictReader(csv_file)
-            soft = {i["software"]: {"path": i["path"], "ext":i["extension"], "matrice":i["matrices"]} for i in csv_reader if i["path"] != "#    Path not Defined    #"}
+            soft = {
+                i["software"]: {
+                    "path": i["path"],
+                    "ext": i["extension"],
+                    "matrice": i["matrices"],
+                }
+                for i in csv_reader
+                if i["path"] != "#    Path not Defined    #"
+            }
 
     else:
         create_frame(["config.csv missing", "new config.csv file created"])
@@ -47,7 +54,7 @@ def commandList():
 
 def showHelp():
     create_frame([f"   {i}: {API.commands[i]}    " for i in API.commands])
-    #print([f"   {i}: {API.commands[i]}    " for i in API.commands])
+    # print([f"   {i}: {API.commands[i]}    " for i in API.commands])
 
 
 def testHelp(soft):
