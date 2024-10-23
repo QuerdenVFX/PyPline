@@ -6,5 +6,6 @@
 workspace.code-workspace
 config.xlsx
 *.mb
-
+.venv/
+dist/
 *.exe
