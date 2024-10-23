@@ -1,22 +1,21 @@
-# :movie_camera: PyPline :movie_camera:
+# 🎥 PyPline 🎥
 
-### <ins><code style="color:red">PyPline is an educational project to help me to learn python and to improve my skills firstly. </code></ins>
+### <ins><code style="color:red">PyPline is an educational project to help me learn Python and improve my skills.</code></ins>
 
-PyPline is a pipeline tool to help VFX artist to have consistency and organization for any projects.
-This project is a command line interface for VFX artists to help them to have a better workflow.
+PyPline is a pipeline tool designed to help VFX artists maintain consistency and organization for any project. This project is a command-line interface for VFX artists to improve their workflow.
 
 ## Changelog:
 
 ### <ins>23/10/2024</ins>
 
-:tada: **First release of PyPline** :tada:
+🎉 **First release of PyPline** 🎉
 
-First verion released with the following features:
+First version released with the following features:
 
 - Add new project or shot
 - Configure software list
-- List all project created with PyPline
-- Run software with selected project and shot (**<ins><code style="color:darkorange">Houdini only:</code></ins>** and set environment variables)
+- List all projects created with PyPline
+- Run software with selected project and shot (**<ins><code style="color:darkorange">Houdini only</code></ins>** and set environment variables)
 
 ## Installation:
 
@@ -29,28 +28,28 @@ First verion released with the following features:
 | | |
 |-|-|
 |Software| Write the name of the software you want to configure|
-|Path| Write / Paste the path of the software executable|
-|Matrices| Write the folder you want to use for your project. For exemple: cache flipbook render obj ...|
-| Extension| Write the extension of your software file </br> <code style="color:darkred">WARNING:</code> </br> <code style="color:darkred">1. Make sure to use the same extension for all your project files </code> </br> <code style="color:darkred">2. One software can have multiple extensions file like Houdini (.hip, .hiplc and .hipnc) or Maya (.mb and .ma)</code>|
+|Path| Write/Paste the path of the software executable|
+|Directories| Write the folder you want to use for your project. For example: cache, flipbook, render, obj, etc.|
+|Extension| Write the extension of your software file </br> <code style="color:darkred">WARNING:</code> </br> <code style="color:darkred">1. Make sure to use the same extension for all your project files </code> </br> <code style="color:darkred">2. One software can have multiple extensions, like Houdini (.hip, .hiplc, .hipnc) or Maya (.mb, .ma)</code>|
 
-Press [ **+** ] button to add software to your configuration file.
+Press the [ **+** ] button to add software to your configuration file.
 
-Press [ **-** ] button to remove software to your configuration file.
+Press the [ **-** ] button to remove software from your configuration file.
 
-Click on a line to edit the software configuration and press [ **Update** ] button to save the changes.
+Click on a line to edit the software configuration and press the [ **Update** ] button to save the changes.
 
-<code style="color:gold">For each software added to your configuration file will add a new command in the command list. You can use this command to run the software with the selected project and shot.</code>
+<code style="color:gold">For each software added to your configuration file, a new command will be added to the command list. You can use this command to run the software with the selected project and shot.</code>
 
 ## Commands:
 
-There is the differents commands available on PyPine yet:
+Here are the different commands available in PyPline so far:
 | Commands | Description |
 |--|--|
-| help | Obviously, this command show you the differents commands available |
-|add|Create new project or shot|
-|conf|Configure software list|
-|list| Show you all project created with PyPline|
-|go| Run software with selected project and shot|
-|clear| Clear the command line app|
-|reset| Reset work environment|
-|close| Close PyPline app
+| help | Shows the available commands |
+| add | Create a new project or shot |
+| conf | Configure software list |
+| list | Shows all projects created with PyPline |
+| go | Run software with selected project and shot |
+| clear | Clear the command-line app |
+| reset | Reset the work environment |
+| close | Close the PyPline app |
