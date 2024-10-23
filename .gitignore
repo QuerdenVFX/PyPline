@@ -8,4 +8,6 @@ config.xlsx
 *.mb
 .venv/
 dist/
+_pycache_/
+build/
 *.exe
