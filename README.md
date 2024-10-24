@@ -19,7 +19,7 @@ First version released with the following features:
 
 ## Installation:
 
-1. Download the latest version of PyPline from the [Releases](https://github.com/PyPline/PyPline/releases) page.
+1. Download the latest version of PyPline from the [Releases](https://github.com/QuerdenVFX/PyPline/releases) page.
 2. Extract the downloaded file to a folder of your choice.
 3. Run the **PyPline.exe** file.
 4. Configure your software list in the **config.csv** file using the <ins>**conf**</ins> command.
